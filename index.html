@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="A fast browser-based font preview gallery with custom text, grid layouts and presentation mode.">
+  <title>Font Previewer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="toolbar" id="toolbar">
+    <div class="toolbar__brand">
+      <div>
+        <div class="eyebrow">FONT GALLERY</div>
+        <h1>Font Previewer</h1>
+      </div>
+      <div class="font-count" id="fontCount" aria-live="polite">0 fonts</div>
+    </div>
+
+    <div class="controls controls--primary">
+      <label class="field field--grow">
+        <span>Preview text</span>
+        <input id="sampleText" type="text" value="Beautiful Fonts" autocomplete="off" spellcheck="false">
+      </label>
+
+      <label class="field field--search">
+        <span>Search</span>
+        <input id="searchInput" type="search" placeholder="Font name…" autocomplete="off">
+      </label>
+    </div>
+
+    <div class="controls controls--secondary">
+      <div class="control-group">
+        <span class="control-label">Columns</span>
+        <div class="segmented" id="columnButtons" aria-label="Grid columns">
+          <button type="button" data-columns="1">1</button>
+          <button type="button" data-columns="2">2</button>
+          <button type="button" data-columns="3">3</button>
+          <button type="button" data-columns="4">4</button>
+          <button type="button" data-columns="5">5</button>
+          <button type="button" data-columns="6" class="is-active">6</button>
+          <button type="button" data-columns="7">7</button>
+          <button type="button" data-columns="8">8</button>
+        </div>
+      </div>
+
+      <label class="range-control">
+        <span>Font size <strong id="fontSizeValue">24</strong>px</span>
+        <input id="fontSize" type="range" min="14" max="72" value="24" step="1">
+      </label>
+
+      <label class="range-control">
+        <span>Card height <strong id="cardHeightValue">120</strong>px</span>
+        <input id="cardHeight" type="range" min="80" max="260" value="120" step="5">
+      </label>
+
+      <label class="switch">
+        <input id="showNames" type="checkbox" checked>
+        <span class="switch__track" aria-hidden="true"></span>
+        <span>Names</span>
+      </label>
+
+      <div class="toolbar-actions">
+        <button id="themeButton" class="button button--ghost" type="button" title="Toggle theme">Theme</button>
+        <button id="presentationButton" class="button" type="button">Presentation</button>
+        <button id="fullscreenButton" class="button button--accent" type="button">Fullscreen</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="status-card" id="emptyState" hidden>
+      <h2>No fonts found</h2>
+      <p>Add font files to <code>fonts/</code>, regenerate <code>fonts.js</code>, then refresh this page.</p>
+    </section>
+
+    <section class="status-card status-card--error" id="errorState" hidden>
+      <h2>Some fonts could not be loaded</h2>
+      <p id="errorMessage"></p>
+    </section>
+
+    <section class="font-grid" id="fontGrid" aria-live="polite"></section>
+  </main>
+
+  <button class="exit-presentation" id="exitPresentation" type="button" hidden>Exit presentation</button>
+
+  <script src="fonts.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
