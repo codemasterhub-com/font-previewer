@@ -15,6 +15,7 @@
         <div class="eyebrow">www.codemasterhub.com</div>
         <h1>Font Previewer</h1>
       </div>
+      <div class="font-count" id="sourceLabel">Bundled fonts</div>
       <div class="font-count" id="fontCount" aria-live="polite">0 fonts</div>
     </div>
 
@@ -62,6 +63,17 @@
       </label>
 
       <div class="toolbar-actions">
+        <input
+          id="localFolderInput"
+          type="file"
+          hidden
+          accept=".ttf,.otf,.woff,.woff2,font/ttf,font/otf,font/woff,font/woff2"
+          webkitdirectory
+          directory
+          multiple
+        >
+        <button id="openLocalButton" class="button" type="button">Open Local Folder</button>
+        <button id="useHostedButton" class="button button--ghost" type="button" hidden>Use Bundled Fonts</button>
         <button id="themeButton" class="button button--ghost" type="button" title="Toggle theme">Theme</button>
         <button id="presentationButton" class="button" type="button">Presentation</button>
         <button id="fullscreenButton" class="button button--accent" type="button">Fullscreen</button>
@@ -72,7 +84,7 @@
   <main>
     <section class="status-card" id="emptyState" hidden>
       <h2>No fonts found</h2>
-      <p>Add font files to <code>fonts/</code>, regenerate <code>fonts.js</code>, then refresh this page.</p>
+      <p id="emptyMessage">Click Open Local Folder to preview fonts directly from your computer.</p>
     </section>
 
     <section class="status-card status-card--error" id="errorState" hidden>
