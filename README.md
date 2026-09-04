@@ -1,25 +1,62 @@
 # Font Previewer
 
-A lightweight browser-based font gallery for previewing large font collections. It is designed for browsing, screenshots, screen recording and digital-product previews.
+A fast, lightweight **online font previewer and browser font tester** for previewing large collections of **TTF, OTF, WOFF and WOFF2 fonts**. Use bundled fonts from GitHub Pages or open a local font folder directly from your computer without uploading the files anywhere.
+
+## Live Font Previewer
+
+**Open the tool:** https://codemasterhub-com.github.io/font-previewer/
+
+**CodeMasterHub:** https://codemasterhub.com
+
+Font Previewer is designed for font browsing, typography testing, screenshots, screen recording, digital-product previews and quickly comparing hundreds or thousands of fonts in one place.
 
 ## Features
 
-- Loads fonts from the repository `fonts/` folder
-- Supports TTF, OTF, WOFF and WOFF2
-- 1–8 column grid
-- Custom preview text
-- Adjustable font size and card height
-- Search by font name
-- Show/hide font names
-- Presentation mode for clean screen recording
-- Fullscreen mode
+- Preview **local fonts directly in your browser**
+- Open an entire local font folder, including subfolders
+- Local font files stay on your computer and are not uploaded to GitHub or another server
+- Load bundled fonts from the repository `fonts/` folder when no local folder is selected
+- Supports **TTF, OTF, WOFF and WOFF2** font files
+- Custom preview text for testing words, names, titles and phrases
+- Search fonts by filename or font name
+- 1–8 column responsive font grid
+- Adjustable font size and preview card height
+- Show or hide font names
+- Presentation mode for clean font previews
+- Fullscreen mode for screenshots and screen recording
 - Light and dark themes
-- Responsive layout
-- Lazy font loading for large collections
+- Lazy font loading for better performance with large font collections
 - No frameworks or external dependencies
-- Automatic font manifest generation during GitHub Pages deployment
+- Automatic bundled-font manifest generation during GitHub Pages deployment
 
-## Repository structure
+## Preview Local Fonts
+
+The easiest way to use Font Previewer is through the live version:
+
+https://codemasterhub-com.github.io/font-previewer/
+
+1. Click **Open Local Folder**.
+2. Select a folder containing font files on your computer.
+3. The browser finds supported `.ttf`, `.otf`, `.woff` and `.woff2` files in that folder and its subfolders.
+4. The fonts are loaded directly in your browser for previewing.
+
+Your local font files are **not uploaded**. They remain on your computer and are only read by the browser for the current preview session.
+
+## Bundled Fonts from GitHub
+
+Font Previewer can also display fonts stored in the repository `fonts/` folder.
+
+When no local folder is selected, the app uses the bundled font list generated in `fonts.js` and loads those font files from GitHub Pages as needed.
+
+To add bundled fonts:
+
+1. Upload font files to the `fonts/` folder.
+2. Commit the changes to `main`.
+3. GitHub Actions automatically scans `fonts/`, generates `fonts.js` and deploys the updated Font Previewer.
+
+Subfolders inside `fonts/` are supported.
+
+## Repository Structure
 
 ```text
 font-previewer/
@@ -38,37 +75,24 @@ font-previewer/
 └── .nojekyll
 ```
 
-## Add fonts
+## Using the Font Previewer
 
-The easiest workflow is:
+- Enter anything in **Preview text** to test it across all loaded fonts.
+- Choose **1–8 columns** to control how many font previews appear on each row.
+- Adjust **Font size** and **Card height** for the layout you need.
+- Use **Search** to quickly find a specific font.
+- Disable **Names** for a cleaner visual preview.
+- Use **Presentation** mode to hide the controls.
+- Use **Fullscreen** for screen recording or screenshots.
+- Click **Use Bundled Fonts** to switch back from local fonts to the fonts hosted with the project.
 
-1. Upload your font files into the `fonts/` folder on GitHub.
-2. Commit the upload to `main`.
-3. GitHub Actions automatically scans `fonts/`, generates `fonts.js`, and deploys the updated site.
+Layout preferences are saved in the browser for future visits.
 
-You do **not** need to manually edit `fonts.js` when using the included GitHub Pages workflow.
+## Optional Local Manifest Generation
 
-Supported formats: `.ttf`, `.otf`, `.woff`, `.woff2`.
-
-Subfolders inside `fonts/` are supported too.
-
-## Enable GitHub Pages once
-
-Open the repository and go to:
-
-**Settings → Pages → Build and deployment → Source**
-
-Choose:
-
-**GitHub Actions**
-
-After that, every push to `main` automatically rebuilds and publishes the previewer.
-
-## Optional local manifest generation
+If you are developing the project locally and want to generate a bundled-font manifest manually, use either of these methods from the repository root.
 
 ### Windows PowerShell
-
-From the repository root:
 
 ```powershell
 .\tools\generate-font-list.ps1
@@ -80,20 +104,16 @@ From the repository root:
 node tools/generate-font-list.mjs
 ```
 
-Both scripts scan the `fonts/` folder recursively and regenerate `fonts.js`.
+Both scripts recursively scan the `fonts/` folder and regenerate `fonts.js`.
 
-## Using the previewer
+## Why `fonts.js` Exists
 
-- Enter any text in **Preview text**.
-- Choose **1–8 columns** depending on how many fonts you want visible at once.
-- Adjust **Font size** and **Card height**.
-- Use **Names** to hide filenames from a clean recording.
-- Use **Presentation** to remove the toolbar.
-- Use **Fullscreen** for screen recording.
-- Search by filename when you need a specific font.
+A static website cannot automatically enumerate files inside a server directory using normal client-side JavaScript. The generated `fonts.js` manifest tells the browser which bundled font files exist.
 
-The selected layout settings are saved in the browser for the next visit.
+This manifest is only needed for the fonts hosted with the project. **Local font previewing does not require `fonts.js`** because selected local files are read directly by the browser.
 
-## Why `fonts.js` exists
+## About CodeMasterHub
 
-Static websites cannot enumerate files inside a server directory from client-side JavaScript. The generated `fonts.js` manifest tells the browser exactly which font files exist. On GitHub Pages this manifest is generated automatically by the included deployment workflow.
+Font Previewer is a free browser-based font utility by **CodeMasterHub**.
+
+Visit: https://codemasterhub.com
