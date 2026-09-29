@@ -87,7 +87,8 @@
       <p id="emptyMessage">Click Open Local Folder to preview fonts directly from your computer.</p>
     </section>
 
-    <section class="status-card status-card--error" id="errorState" hidden>
+    <section class="status-card status-card--error" id="errorState" role="alert" hidden>
+      <button id="errorCloseButton" class="error-close" type="button" aria-label="Dismiss error" title="Dismiss error">&times;</button>
       <h2>Some fonts could not be loaded</h2>
       <p id="errorMessage"></p>
     </section>
