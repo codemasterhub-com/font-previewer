@@ -277,7 +277,27 @@ body.hide-names .font-name { display: none; }
 .status-card h2 { margin-top: 0; }
 .status-card p { color: var(--muted); }
 .status-card code { background: var(--surface-2); padding: 2px 6px; border-radius: 5px; }
-.status-card--error { border-color: #d96b6b; }
+.status-card--error { border-color: #d96b6b; position: relative; padding-right: 46px; padding-left: 46px; }
+.error-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 23px;
+  line-height: 1;
+  cursor: pointer;
+}
+.error-close:hover, .error-close:focus-visible {
+  background: var(--border);
+  outline-offset: 2px;
+}
 
 .exit-presentation {
   position: fixed;
