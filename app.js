@@ -10,6 +10,7 @@
   let fonts = hostedFonts.slice();
   let sourceMode = 'hosted';
   let sourceGeneration = 0;
+  let errorDismissTimer = null;
 
   const els = {
     grid: document.getElementById('fontGrid'),
@@ -33,7 +34,8 @@
     empty: document.getElementById('emptyState'),
     emptyMessage: document.getElementById('emptyMessage'),
     error: document.getElementById('errorState'),
-    errorMessage: document.getElementById('errorMessage')
+    errorMessage: document.getElementById('errorMessage'),
+    errorClose: document.getElementById('errorCloseButton')
   };
 
   const state = {
@@ -265,14 +267,22 @@
     }
   }
 
-  function showLoadErrors() {
-    if (!state.failed.size) {
-      els.error.hidden = true;
-      return;
+  function hideLoadErrors() {
+    if (errorDismissTimer !== null) {
+      clearTimeout(errorDismissTimer);
+      errorDismissTimer = null;
     }
+    els.error.hidden = true;
+  }
 
-    els.error.hidden = false;
+  function showLoadErrors() {
+    // Each new failure restarts the 5-second countdown.
+    hideLoadErrors();
+    if (!state.failed.size) return;
+
     els.errorMessage.textContent = `${state.failed.size} font file${state.failed.size === 1 ? '' : 's'} could not be loaded.`;
+    els.error.hidden = false;
+    errorDismissTimer = setTimeout(hideLoadErrors, 5000);
   }
 
   function openLocalFolder() {
@@ -376,6 +386,7 @@
     saveSetting('theme', state.theme);
   }
 
+  els.errorClose.addEventListener('click', hideLoadErrors);
   els.sampleText.addEventListener('input', updatePreviewText);
   els.search.addEventListener('input', filterFonts);
 
